@@ -183,3 +183,4 @@ Será considerado um diferencial se você fizer tratamentos de erros, falhas de 
 <h4 align="center"> 
     Feito com ♥ por Everton Ferreira e Taynan Ferreira
 </h4>
+.
