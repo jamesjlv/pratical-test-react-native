@@ -1,0 +1,38 @@
+import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import { RFValue } from "react-native-responsive-fontsize";
+import styled from "styled-components/native";
+
+export const Container = styled.View`
+  flex: 1;
+  margin-bottom: 16px;
+`;
+
+export const Header = styled.View`
+  width: 100%;
+  padding: 16px 0;
+`;
+
+export const Title = styled.Text`
+  font-size: ${RFValue(18)}px;
+  font-family: ${({ theme }) => theme.fonts.black};
+`;
+
+export const CategoryWrapper = styled.View`
+  width: 74px;
+  height: 100px;
+  margin-right: 12px;
+`;
+
+export const CategoryImage = styled.View`
+  height: 74px;
+  width: 74px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 4px;
+  margin-bottom: 4px;
+`;
+
+export const CategoryName = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(14)}px;
+  color: ${({ theme }) => theme.colors.gray_1};
+`;
