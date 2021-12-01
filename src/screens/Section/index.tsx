@@ -1,6 +1,6 @@
 import { useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
+import { ActivityIndicator, StatusBar } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { BackButton } from "../../components/BackButton";
 import { Book } from "../../components/Book";
@@ -39,18 +39,23 @@ export function Section() {
         <BackButton onPress={() => {}} />
         <Title>{category}</Title>
       </Header>
-      <ScrollView>
-        <BooksFinded>
-          {books?.results?.books?.map((item) => (
-            <Book
-              title={item.title}
-              author={item.author}
-              bookImageUrl={item.book_image}
-              description={item.description}
-            />
-          ))}
-        </BooksFinded>
-      </ScrollView>
+
+      {!books ? (
+        <ActivityIndicator />
+      ) : (
+        <ScrollView>
+          <BooksFinded>
+            {books?.results?.books?.map((item) => (
+              <Book
+                title={item.title}
+                author={item.author}
+                bookImageUrl={item.book_image}
+                description={item.description}
+              />
+            ))}
+          </BooksFinded>
+        </ScrollView>
+      )}
     </Container>
   );
 }
