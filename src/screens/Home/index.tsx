@@ -1,9 +1,12 @@
-import React from "react";
-import { StatusBar } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, StatusBar } from "react-native";
 import Animated from "react-native-reanimated";
 import { BooksSlider } from "../../components/BooksSlider";
 import { Category } from "../../components/Category";
 import { Search } from "../../components/Search";
+import { BookCategory } from "../../dtos/BookCategory";
+import { BookData } from "../../dtos/BookData";
+import { api } from "../../services/api";
 
 import {
   Container,
@@ -15,6 +18,18 @@ import {
 } from "./styles";
 
 export function Home() {
+  const [booksData, setBooksData] = useState<BookData>({} as BookData);
+
+  useEffect(() => {
+    async function fetchBooks() {
+      const response = await api.get(
+        "/svc/books/v3/lists/overview.json?api-key=vi0bsV0yOCA9qYnmAaOUJV4dO0BNhUGR"
+      );
+      setBooksData(response.data);
+    }
+    fetchBooks();
+  }, []);
+
   return (
     <Container>
       <StatusBar
@@ -35,14 +50,22 @@ export function Home() {
       <FormSeach>
         <Search placeholder="Qual livro você gostaria de ler hoje?" />
       </FormSeach>
-      <Animated.ScrollView
-        contentContainerStyle={{ paddingHorizontal: 16 }}
-        showsHorizontalScrollIndicator={false}
-      >
-        <BooksSlider title="Para você" />
-        <Category />
-        <BooksSlider title="Os mais lidos da semana" />
-      </Animated.ScrollView>
+      {!booksData ? (
+        <ActivityIndicator />
+      ) : (
+        <Animated.ScrollView
+          contentContainerStyle={{ paddingHorizontal: 16 }}
+          showsHorizontalScrollIndicator={false}
+        >
+          <BooksSlider title="Para você" lists={booksData?.results?.lists[0]} />
+
+          <Category />
+          <BooksSlider
+            title="Os mais lidos da semana"
+            lists={booksData?.results?.lists[7]}
+          />
+        </Animated.ScrollView>
+      )}
       {/* Colocar o botão navigation */}
     </Container>
   );

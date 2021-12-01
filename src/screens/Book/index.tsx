@@ -24,9 +24,18 @@ import {
   ButtonText,
 } from "./styles";
 import { useTheme } from "styled-components";
-
+import { useRoute } from "@react-navigation/native";
+interface Params {
+  title: string;
+  author: string;
+  bookImageUrl: string;
+  description: string;
+}
 export function Book() {
   const theme = useTheme();
+  const routes = useRoute();
+  const { title, author, bookImageUrl, description } = routes.params as Params;
+
   return (
     <Container>
       <StatusBar
@@ -56,12 +65,12 @@ export function Book() {
         <BookInfo>
           <BookImage
             source={{
-              uri: "https://storage.googleapis.com/du-prd/books/images/9781538719725.jpg",
+              uri: bookImageUrl,
             }}
           />
           <BookDetails>
-            <Title>MERCY</Title>
-            <Author>David Baldacci</Author>
+            <Title>{title}</Title>
+            <Author>{author}</Author>
             <Rate>
               <Stars>
                 <Feather name="star" size={10} color={theme.colors.primary} />
@@ -80,20 +89,7 @@ export function Book() {
         </BookInfo>
         <BookAbout>
           <AboutTitle>Sobre este livro</AboutTitle>
-          <About>
-            Linguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeira Linguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeiraLinguagem estrangeiraLinguagem
-            estrangeiraLinguagem estrangeira
-          </About>
+          <About>{description}</About>
         </BookAbout>
       </Content>
       <GoReadBook>

@@ -17,9 +17,9 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.black};
 `;
 
-export const CategoryWrapper = styled.View`
+export const CategoryWrapper = styled(BorderlessButton)`
   width: 74px;
-  height: 100px;
+  /* height: 100px; */
   margin-right: 12px;
 `;
 
@@ -33,6 +33,6 @@ export const CategoryImage = styled.View`
 
 export const CategoryName = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
-  font-size: ${RFValue(14)}px;
+  font-size: ${RFValue(12)}px;
   color: ${({ theme }) => theme.colors.gray_1};
 `;

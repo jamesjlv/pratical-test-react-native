@@ -1,21 +1,37 @@
 import React from "react";
 import { Feather } from "@expo/vector-icons";
-
+import {
+  useNavigation,
+  NavigationProp,
+  ParamListBase,
+} from "@react-navigation/native";
 import { Container, BookImage, Title, Author, Rate } from "./styles";
 import { useTheme } from "styled-components";
 
-export function Book() {
+interface BookProps {
+  title: string;
+  author: string;
+  bookImageUrl: string;
+  description: string;
+}
+
+export function Book({ title, author, bookImageUrl, description }: BookProps) {
   const theme = useTheme();
+  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+  function handleSeeBook() {
+    navigate("Book", { title, author, bookImageUrl, description: description });
+  }
 
   return (
-    <Container>
+    <Container onPress={handleSeeBook}>
       <BookImage
         source={{
-          uri: "https://storage.googleapis.com/du-prd/books/images/9781538719725.jpg",
+          uri: bookImageUrl,
         }}
       />
-      <Title>MERCY</Title>
-      <Author>David Baldacci</Author>
+      <Title>{title}</Title>
+      <Author>{author}</Author>
       <Rate>
         <Feather name="star" size={10} color={theme.colors.primary} />
         <Feather name="star" size={10} color={theme.colors.primary} />

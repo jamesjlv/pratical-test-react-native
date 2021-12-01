@@ -1,9 +1,11 @@
+import { BorderlessButton } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
-export const Container = styled.View`
+export const Container = styled(BorderlessButton)`
   margin-right: 12px;
   margin-bottom: 24px;
+  width: 104px;
 `;
 
 export const BookImage = styled.Image`
@@ -18,6 +20,7 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.gray_1};
   line-height: 16px;
 `;
+
 export const Author = styled.Text`
   font-size: ${RFValue(12)}px;
   font-family: ${({ theme }) => theme.fonts.regular};
