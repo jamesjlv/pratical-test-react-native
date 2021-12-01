@@ -2,14 +2,15 @@ import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-  flex: 1;
   margin-right: 12px;
+  margin-bottom: 24px;
 `;
 
 export const BookImage = styled.Image`
   width: 104px;
   height: 160px;
   margin-bottom: 4px;
+  border-radius: 4px;
 `;
 export const Title = styled.Text`
   font-size: ${RFValue(14)}px;

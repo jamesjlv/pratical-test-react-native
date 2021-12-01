@@ -9,7 +9,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  padding: 16px 0;
+  margin-bottom: 16px;
 `;
 
 export const Title = styled.Text`
