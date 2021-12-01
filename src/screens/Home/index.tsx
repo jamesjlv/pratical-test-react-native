@@ -4,10 +4,9 @@ import Animated from "react-native-reanimated";
 import { BooksSlider } from "../../components/BooksSlider";
 import { Category } from "../../components/Category";
 import { Search } from "../../components/Search";
-import { BookCategory } from "../../dtos/BookCategory";
 import { BookData } from "../../dtos/BookData";
 import { api } from "../../services/api";
-
+import { Feather } from "@expo/vector-icons";
 import {
   Container,
   Header,
@@ -15,11 +14,13 @@ import {
   Avatar,
   ImageProfile,
   FormSeach,
+  Navigation,
 } from "./styles";
+import { useTheme } from "styled-components";
 
 export function Home() {
   const [booksData, setBooksData] = useState<BookData>({} as BookData);
-
+  const theme = useTheme();
   useEffect(() => {
     async function fetchBooks() {
       const response = await api.get(
@@ -66,7 +67,9 @@ export function Home() {
           />
         </Animated.ScrollView>
       )}
-      {/* Colocar o botão navigation */}
+      <Navigation>
+        <Feather name="home" size={24} color={theme.colors.primary} />
+      </Navigation>
     </Container>
   );
 }

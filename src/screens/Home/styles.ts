@@ -1,4 +1,7 @@
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from "react-native-iphone-x-helper";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
@@ -37,4 +40,13 @@ export const FormSeach = styled.View`
   width: 100%;
   padding: 0 16px;
   margin-bottom: 16px;
+`;
+
+export const Navigation = styled.View`
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: ${getBottomSpace() + 16}px;
 `;
