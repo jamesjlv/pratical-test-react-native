@@ -1,15 +1,19 @@
+import { Dimensions } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
+
+console.log(Dimensions.get("screen").width);
 
 export const Container = styled(BorderlessButton)`
   margin-right: 12px;
   margin-bottom: 24px;
   width: 104px;
+  width: ${Dimensions.get("screen").width > 389 ? "104px" : "100px"};
 `;
 
 export const BookImage = styled.Image`
-  width: 104px;
+  width: 100%;
   height: 160px;
   margin-bottom: 4px;
   border-radius: 4px;

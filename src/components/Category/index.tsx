@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { BookCategory } from "../../dtos/BookCategory";
 import { api } from "../../services/api";
@@ -35,10 +35,14 @@ export function Category() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await api.get(
-        "/svc/books/v3/lists/names.json?api-key=vi0bsV0yOCA9qYnmAaOUJV4dO0BNhUGR"
-      );
-      setCategory(data.data);
+      try {
+        const data = await api.get(
+          "/svc/books/v3/lists/names.json?api-key=vi0bsV0yOCA9qYnmAaOUJV4dO0BNhUGR"
+        );
+        setCategory(data.data);
+      } catch (error) {
+        Alert.alert("Opa", "Não foi possivel carregar as categorias");
+      }
     }
     fetchData();
   }, []);
@@ -53,7 +57,7 @@ export function Category() {
       ) : (
         <FlatList
           data={category.results}
-          keyExtractor={(key) => key.display_name}
+          keyExtractor={(key, index) => key.display_name + index}
           renderItem={({ item }) => (
             <CategoryWrapper onPress={() => handleCategorySelected(item)}>
               <CategoryImage />

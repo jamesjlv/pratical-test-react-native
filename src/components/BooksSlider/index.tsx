@@ -31,13 +31,14 @@ export function BooksSlider({ title, lists }: BooksSliderProps) {
       ) : (
         <FlatList
           data={lists.books}
-          keyExtractor={({ author }) => String(Math.random())}
+          keyExtractor={(key, index) => `${key.title}${index}`}
           renderItem={({ item }) => (
             <Book
               title={item.title}
               author={item.author}
               bookImageUrl={item.book_image}
               description={item.description}
+              link={item.amazon_product_url}
             />
           )}
           horizontal

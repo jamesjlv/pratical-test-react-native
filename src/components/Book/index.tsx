@@ -13,14 +13,27 @@ interface BookProps {
   author: string;
   bookImageUrl: string;
   description: string;
+  link: string;
 }
 
-export function Book({ title, author, bookImageUrl, description }: BookProps) {
+export function Book({
+  title,
+  author,
+  bookImageUrl,
+  description,
+  link,
+}: BookProps) {
   const theme = useTheme();
   const { navigate }: NavigationProp<ParamListBase> = useNavigation();
 
   function handleSeeBook() {
-    navigate("Book", { title, author, bookImageUrl, description: description });
+    navigate("Book", {
+      title,
+      author,
+      bookImageUrl,
+      description: description,
+      link,
+    });
   }
 
   return (

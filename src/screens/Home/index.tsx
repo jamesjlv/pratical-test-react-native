@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StatusBar } from "react-native";
+import React, { useState } from "react";
+import { ActivityIndicator, Alert, StatusBar } from "react-native";
 import Animated from "react-native-reanimated";
 import { BooksSlider } from "../../components/BooksSlider";
 import { Category } from "../../components/Category";
 import { Search } from "../../components/Search";
-import { BookData } from "../../dtos/BookData";
-import { api } from "../../services/api";
+
 import { Feather } from "@expo/vector-icons";
 import {
   Container,
@@ -17,19 +16,31 @@ import {
   Navigation,
 } from "./styles";
 import { useTheme } from "styled-components";
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from "@react-navigation/native";
+import { useBooks } from "../../hooks/useBooks";
 
 export function Home() {
-  const [booksData, setBooksData] = useState<BookData>({} as BookData);
+  const { booksData, handleSearchBooks } = useBooks();
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
-  useEffect(() => {
-    async function fetchBooks() {
-      const response = await api.get(
-        "/svc/books/v3/lists/overview.json?api-key=vi0bsV0yOCA9qYnmAaOUJV4dO0BNhUGR"
-      );
-      setBooksData(response.data);
+  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+  function handleSearch() {
+    setIsLoading(true);
+    try {
+      handleSearchBooks(search);
+      navigate("Search");
+      setSearch("");
+    } catch (error) {
+      Alert.alert("Opa", "Não foi possivel buscar nos livros");
     }
-    fetchBooks();
-  }, []);
+    setIsLoading(false);
+  }
 
   return (
     <Container>
@@ -49,10 +60,19 @@ export function Home() {
         </Avatar>
       </Header>
       <FormSeach>
-        <Search placeholder="Qual livro você gostaria de ler hoje?" />
+        <Search
+          click={handleSearch}
+          placeholder="Qual livro você gostaria de ler hoje?"
+          value={search}
+          onChangeText={setSearch}
+          loading={isLoading}
+        />
       </FormSeach>
-      {!booksData ? (
-        <ActivityIndicator />
+      {!booksData?.results ? (
+        <ActivityIndicator
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          color={theme.colors.primary}
+        />
       ) : (
         <Animated.ScrollView
           contentContainerStyle={{ paddingHorizontal: 16 }}

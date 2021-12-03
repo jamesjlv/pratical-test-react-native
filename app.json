@@ -3,9 +3,11 @@
     "name": "pratical-test-react-native",
     "slug": "pratical-test-react-native",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#FFF9F3"
+    }
   },
   "name": "pratical-test-react-native"
 }

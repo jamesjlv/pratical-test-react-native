@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, Text } from "react-native";
+import { Alert, Linking, StatusBar } from "react-native";
 import { BackButton } from "../../components/BackButton";
 import { Feather } from "@expo/vector-icons";
 import {
@@ -25,16 +25,32 @@ import {
 } from "./styles";
 import { useTheme } from "styled-components";
 import { useRoute } from "@react-navigation/native";
+
 interface Params {
   title: string;
   author: string;
   bookImageUrl: string;
   description: string;
+  link: string;
 }
 export function Book() {
   const theme = useTheme();
   const routes = useRoute();
-  const { title, author, bookImageUrl, description } = routes.params as Params;
+  const { title, author, bookImageUrl, description, link } =
+    routes.params as Params;
+
+  async function handleBuyBook() {
+    try {
+      await Linking.openURL(link);
+      return;
+    } catch (error) {
+      Alert.alert(
+        "Ops!",
+        "Não foi possivel abrir o link para comprar o livro."
+      );
+      return;
+    }
+  }
 
   return (
     <Container>
@@ -44,7 +60,7 @@ export function Book() {
         backgroundColor="transparent"
       />
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton />
         <Actions>
           <Feather
             name="heart"
@@ -57,6 +73,7 @@ export function Book() {
             size={24}
             color={theme.colors.gray_1}
             style={{ marginLeft: 16 }}
+            onPress={() => {}}
           />
         </Actions>
       </Header>
@@ -92,7 +109,7 @@ export function Book() {
           <About>{description}</About>
         </BookAbout>
       </Content>
-      <GoReadBook>
+      <GoReadBook onPress={handleBuyBook}>
         <ButtonText>Ler agora</ButtonText>
       </GoReadBook>
     </Container>

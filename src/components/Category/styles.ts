@@ -19,7 +19,6 @@ export const Title = styled.Text`
 
 export const CategoryWrapper = styled(BorderlessButton)`
   width: 74px;
-  /* height: 100px; */
   margin-right: 12px;
 `;
 

@@ -8,6 +8,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
+  width: 100%;
 `;
 export const Header = styled.View`
   width: 100%;
@@ -33,6 +34,7 @@ export const Content = styled.View`
 
 export const BookInfo = styled.View`
   flex-direction: row;
+  width: 100%;
 `;
 
 export const BookImage = styled.Image`
@@ -42,7 +44,8 @@ export const BookImage = styled.Image`
 `;
 
 export const BookDetails = styled.View`
-  margin-left: 16px;
+  padding-left: 16px;
+  flex: 1;
 `;
 
 export const Title = styled.Text`
@@ -80,10 +83,12 @@ export const Rating = styled.Text`
 
 export const CategoryContainer = styled.View`
   margin-top: 16px;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const CategoryName = styled.Text`
-  width: 100%;
   padding: 8px;
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.gray_4};
